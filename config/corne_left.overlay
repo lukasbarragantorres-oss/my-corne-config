@@ -1,21 +1,35 @@
-/*
- * Re-mapping the columns to match your hand-wiring.
- * Pin order: 14, 15, 18, 19, 20, 21
- */
+#include <dt-bindings/zmk/matrix_transform.h>
 
 / {
-    /* * We don't need #include "corne.dtsi" here because the build system
-     * loads it automatically for us. We just modify the existing node.
-     */
-};
+    chosen {
+        zmk,kscan = &kscan0;
+    };
 
-&kscan0 {
-    col-gpios
-        = <&pro_micro 14 GPIO_ACTIVE_HIGH>
-        , <&pro_micro 15 GPIO_ACTIVE_HIGH>
-        , <&pro_micro 18 GPIO_ACTIVE_HIGH>
-        , <&pro_micro 19 GPIO_ACTIVE_HIGH>
-        , <&pro_micro 20 GPIO_ACTIVE_HIGH>
-        , <&pro_micro 21 GPIO_ACTIVE_HIGH>
-        ;
+    kscan0: kscan_0 {
+        compatible = "zmk,kscan-gpio-matrix";
+        wakeup-source;
+        diode-direction = <0>; /* 0 = Col2Row (Standard Corne) */
+        
+        /* * ROWS: The standard Corne row pins you confirmed.
+         * D4, D5, D6, D7
+         */
+        row-gpios
+            = <&pro_micro 4 (GPIO_ACTIVE_HIGH | GPIO_PULL_DOWN)>
+            , <&pro_micro 5 (GPIO_ACTIVE_HIGH | GPIO_PULL_DOWN)>
+            , <&pro_micro 6 (GPIO_ACTIVE_HIGH | GPIO_PULL_DOWN)>
+            , <&pro_micro 7 (GPIO_ACTIVE_HIGH | GPIO_PULL_DOWN)>
+            ;
+
+        /* * COLS: Your custom hand-wired pin order.
+         * 14, 15, 18, 19, 20, 21
+         */
+        col-gpios
+            = <&pro_micro 14 GPIO_ACTIVE_HIGH>
+            , <&pro_micro 15 GPIO_ACTIVE_HIGH>
+            , <&pro_micro 18 GPIO_ACTIVE_HIGH>
+            , <&pro_micro 19 GPIO_ACTIVE_HIGH>
+            , <&pro_micro 20 GPIO_ACTIVE_HIGH>
+            , <&pro_micro 21 GPIO_ACTIVE_HIGH>
+            ;
+    };
 };
