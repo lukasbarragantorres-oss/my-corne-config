@@ -2,13 +2,13 @@
 
 / {
     chosen {
-        zmk,kscan = &kscan0;
+        zmk,kscan = &my_kscan0;
     };
 
-    kscan0: kscan_0 {
+    my_kscan0: my_kscan_0 {
         compatible = "zmk,kscan-gpio-matrix";
         wakeup-source;
-        diode-direction = <0>; /* 0 = Col2Row (Standard Corne) */
+        diode-direction = <0>; /* 0 = Col2Row */
         
         /* * ROWS: The standard Corne row pins you confirmed.
          * D4, D5, D6, D7
