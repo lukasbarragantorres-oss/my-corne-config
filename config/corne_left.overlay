@@ -3,7 +3,11 @@
  * Pin order: 14, 15, 18, 19, 20, 21
  */
 
-#include "corne.dtsi"
+/ {
+    /* * We don't need #include "corne.dtsi" here because the build system
+     * loads it automatically for us. We just modify the existing node.
+     */
+};
 
 &kscan0 {
     col-gpios
